@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace SocialCircle.Models
+namespace SocialCircleAPI.Models
 {
-    public partial class Post
+    public class Post
     {
         public int Id { get; set; }
         public string Title { get; set; } = null!;

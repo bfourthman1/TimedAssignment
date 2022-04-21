@@ -1,4 +1,4 @@
-namespace SocialCircle.Models
+namespace SocialCircleAPI.Models
 {
     public class Comment
     {
