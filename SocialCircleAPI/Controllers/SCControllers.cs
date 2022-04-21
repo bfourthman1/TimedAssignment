@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using SocialCircle.Data;
 using SocialCircleAPI.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace SocialCircleAPI.Controllers
 {
@@ -30,6 +31,13 @@ namespace SocialCircleAPI.Controllers
 
             await _context.SaveChangesAsync();
             return Ok();
+         }
+
+        [HttpGet]
+         public async Task<IActionResult> GetPost()
+         {
+             var Post = await _context.Posts.ToListAsync();
+             return Ok(Post);
          }
     }
 }
