@@ -56,5 +56,16 @@ namespace SocialCircleAPI.Controllers
              await _context.SaveChangesAsync();
              return Ok();
          }
+
+         [HttpGet]
+         [Route("{PostId}")]
+         public async Task<IActionResult> GetCommentsByPostId(int PostId)
+         {
+             var Comment = await _context.Comments.FindAsync(PostId);
+             if (PostId == null){
+                 return NotFound();
+             }
+             return Ok(Comment);
+         }
     }
 }
