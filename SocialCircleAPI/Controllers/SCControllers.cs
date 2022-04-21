@@ -67,5 +67,33 @@ namespace SocialCircleAPI.Controllers
              }
              return Ok(Comment);
          }
+
+         [HttpPost]
+         public async Task<IActionResult> CreateReply([FromForm] Reply model)
+         {
+             if (!ModelState.IsValid)
+             {
+                 return BadRequest(ModelState);
+             }
+
+             _context.Replies.Add(new Reply ()
+             {
+                 Text = model.Text
+             });
+
+             await _context.SaveChangesAsync();
+             return Ok();
+         }
+
+         [HttpGet]
+         [Route("{PostId}")]
+         public async Task<IActionResult> GetRepliesByPostId(int PostId)
+         {
+             var Reply = await _context.Comments.FindAsync(PostId);
+             if (PostId == null){
+                 return NotFound();
+             }
+             return Ok(Reply);
+         }
     }
 }
