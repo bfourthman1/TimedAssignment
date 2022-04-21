@@ -1,4 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
+using SocialCircle.Data;
+
 namespace SocialCircleAPI.Controllers
 {
     [ApiController]
