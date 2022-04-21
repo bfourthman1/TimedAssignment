@@ -34,10 +34,27 @@ namespace SocialCircleAPI.Controllers
          }
 
         [HttpGet]
-         public async Task<IActionResult> GetPost()
+         public async Task<IActionResult> GetPosts()
          {
              var Post = await _context.Posts.ToListAsync();
              return Ok(Post);
+         }
+
+        [HttpPost]
+         public async Task<IActionResult> CreateComment([FromForm] Comment model)
+         {
+             if (!ModelState.IsValid)
+             {
+                 return BadRequest(ModelState);
+             }
+
+             _context.Comments.Add(new Comment ()
+             {
+                 Text = model.Text
+             });
+
+             await _context.SaveChangesAsync();
+             return Ok();
          }
     }
 }
