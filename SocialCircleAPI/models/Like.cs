@@ -12,8 +12,5 @@ namespace SocialCircleAPI.models
         [Key]
         public int Id { get; set; }
         public Guid OwnerId { get; set; }
-
-        [Required]
-        [ForeignKey("Post")]
     }
 }
