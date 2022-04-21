@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
-using SocialCircle.Models;
+using SocialCircleAPI.models;
+using SocialCircleAPI.Models;
 
 namespace SocialCircle.Data
 {
@@ -18,6 +19,12 @@ namespace SocialCircle.Data
         }
 
         public virtual DbSet<Post> Posts { get; set; } = null!;
+
+        public virtual DbSet<Comment> Comments {get; set;} = null!;
+
+        public virtual DbSet<Reply> Replies {get; set;} = null!;
+
+        public virtual DbSet<Like> Likes {get; set;} = null!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -36,6 +43,29 @@ namespace SocialCircle.Data
                 entity.Property(e => e.Text).HasMaxLength(255);
 
                 entity.Property(e => e.Title).HasMaxLength(100);
+            });
+
+            modelBuilder.Entity<Comment>(entity =>
+            {
+                entity.ToTable("Comment");
+
+                entity.Property(e => e.Text).HasMaxLength(255);
+            });
+
+            OnModelCreatingPartial(modelBuilder);
+
+            modelBuilder.Entity<Reply>(entity =>
+            {
+                entity.ToTable("Reply");
+
+                entity.Property(e => e.Text).HasMaxLength(255);
+            });
+            
+             modelBuilder.Entity<Like>(entity =>
+            {
+                entity.ToTable("Like");
+
+                entity.Property(e => e.Id).HasMaxLength(255);
             });
 
             OnModelCreatingPartial(modelBuilder);
