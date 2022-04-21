@@ -9,11 +9,8 @@ namespace SocialCircleAPI.models
 {
     public class Like
     {
-        [Key]
         public int Id { get; set; }
         public Guid OwnerId { get; set; }
 
-        [Required]
-        [ForeignKey("Post")]
     }
 }
