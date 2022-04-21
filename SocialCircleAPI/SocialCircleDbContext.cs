@@ -27,8 +27,6 @@ namespace SocialCircle.Data
             }
         }
 
-        
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Post>(entity =>
@@ -42,8 +40,6 @@ namespace SocialCircle.Data
 
             OnModelCreatingPartial(modelBuilder);
         }
-
-
 
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
     }
