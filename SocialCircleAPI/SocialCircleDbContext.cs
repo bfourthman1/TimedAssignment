@@ -19,6 +19,8 @@ namespace SocialCircle.Data
 
         public virtual DbSet<Post> Posts { get; set; } = null!;
 
+        public virtual DbSet<Comment> Comments {get; set;} = null!;
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
@@ -36,6 +38,13 @@ namespace SocialCircle.Data
                 entity.Property(e => e.Text).HasMaxLength(255);
 
                 entity.Property(e => e.Title).HasMaxLength(100);
+            });
+
+            modelBuilder.Entity<Comment>(entity =>
+            {
+                entity.ToTable("Comment");
+
+                entity.Property(e => e.Text).HasMaxLength(255);
             });
 
             OnModelCreatingPartial(modelBuilder);
