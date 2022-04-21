@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
-using SocialCircle.Models;
+using SocialCircleAPI.Models;
 
 namespace SocialCircle.Data
 {

@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using SocialCircle.Data;
+using SocialCircleAPI.Models;
 
 namespace SocialCircleAPI.Controllers
 {
@@ -12,9 +13,23 @@ namespace SocialCircleAPI.Controllers
         {
             _context = context;
         }
-        // [HttpPost]
-        // public async Task<IActionResult> PostComment()
-        // {
-        // }
+
+        [HttpPost]
+         public async Task<IActionResult> CreatePost([FromForm] Post model)
+         {
+             if (!ModelState.IsValid)
+             {
+                 return BadRequest(ModelState);
+             }
+
+             _context.Posts.Add(new Post()
+             {
+                 Title = model.Title,
+                 Text = model.Text,
+             });
+
+            await _context.SaveChangesAsync();
+            return Ok();
+         }
     }
 }
