@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using SocialCircle.Data;
 using SocialCircleAPI.Models;
 using Microsoft.EntityFrameworkCore;
+using SocialCircleAPI.models;
 
 namespace SocialCircleAPI.Controllers
 {
@@ -95,5 +96,31 @@ namespace SocialCircleAPI.Controllers
              }
              return Ok(Reply);
          }
+
+         [HttpGet]
+         public async Task<IActionResult> GetLikesByPostId( int PostId)
+         {
+             var Like = await _context.Likes.FindAsync(PostId);
+             if (PostId == null){
+                 return NotFound();
+             }
+             return Ok(Like);
+         }
+
+        [HttpPost]
+         public async Task<IActionResult> CreateLike([FromForm] Like model)
+        {
+             if (!ModelState.IsValid)
+            {
+                 return BadRequest(ModelState);
+            }
+            _context.Likes.Add(new Like()
+            {
+                Id = model.Id
+            });
+
+            await _context.SaveChangesAsync();
+            return Ok();
+        }
     }
 }
